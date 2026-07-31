@@ -12,6 +12,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | v1.18.2 | [`v1.18.2`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.18.2) | [`578f723`](https://github.com/reviewdog/action-nimlint/commit/578f72307594d9ca23847db557994f615d43ad92) |
 | v1.18.3 | [`v1.18.3`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.18.3) | [`dfdbb83`](https://github.com/reviewdog/action-nimlint/commit/dfdbb8380501aeedc415b12cc2f35c207ccd52a1) |
 | v1.19.0 | [`v1.19.0`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.19.0) | [`416761c`](https://github.com/reviewdog/action-nimlint/commit/416761c7a147bdf56c31d75b01bd133a52402ea1) |
+| v1.20.0 | [`v1.20.0`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.20.0) | [`eec54c6`](https://github.com/reviewdog/action-nimlint/commit/eec54c6010f7f660ff8aac5b3ef5d1d129a6d69d) |
 
 ## Privacy
 
