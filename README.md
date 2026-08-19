@@ -8,7 +8,8 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
-| v1 | [`v1`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1) | [`eec54c6`](https://github.com/reviewdog/action-nimlint/commit/eec54c6010f7f660ff8aac5b3ef5d1d129a6d69d) |
+| v1 | [`v1`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1) | [`578f723`](https://github.com/reviewdog/action-nimlint/commit/578f72307594d9ca23847db557994f615d43ad92) |
+| v1.18 | [`v1.18`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.18) | [`578f723`](https://github.com/reviewdog/action-nimlint/commit/578f72307594d9ca23847db557994f615d43ad92) |
 | v1.18.1 | [`v1.18.1`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.18.1) | [`2a86f0f`](https://github.com/reviewdog/action-nimlint/commit/2a86f0fecc7558c723ae83d845b2e4e16c7fa4fd) |
 | v1.18.2 | [`v1.18.2`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.18.2) | [`578f723`](https://github.com/reviewdog/action-nimlint/commit/578f72307594d9ca23847db557994f615d43ad92) |
 | v1.18.3 | [`v1.18.3`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.18.3) | [`dfdbb83`](https://github.com/reviewdog/action-nimlint/commit/dfdbb8380501aeedc415b12cc2f35c207ccd52a1) |
