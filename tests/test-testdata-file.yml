@@ -1,0 +1,24 @@
+name: Test using existing testdata nim file
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        with:
+          github_token: ${{ github.token }}
+          # Use the testdata nim file that ships with the action
+          src: 'action/testdata/test1.nim'
+          reporter: 'local'
+          filter_mode: 'nofilter'
+          level: 'error'
+          fail_level: 'none'
+
+      - name: Assert action completed successfully on testdata file
+        run: |
+          echo "Action completed on testdata/test1.nim without error"
+          echo "PASS"
