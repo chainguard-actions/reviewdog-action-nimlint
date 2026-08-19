@@ -8,36 +8,48 @@
 
 **Test Policy SHA:** `843adf9e4b8f85d0c08b27b9d0b09dd094b54702`
 
-**Harden Agent Version:** `1`
+**Harden Agent Version:** `2`
 
-Action **reviewdog--action-nimlint/v1.19.0** was hardened automatically. 2 finding(s) were identified and resolved across 1 iteration(s).
+Action **reviewdog--action-nimlint/v1.19.0** was hardened automatically. 3 finding(s) were identified and resolved across 1 iteration(s).
 
 ## Findings Fixed
 
-### unsafe-shell (severity: high)
-
-The Dockerfile pipes a remotely fetched script directly to `sh` without first saving it to a file for inspection. The command `wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/.../install.sh | sh -s -- ...` executes whatever content is served at that URL immediately in a shell. Even though the URL references a specific commit SHA in the path, the pattern itself is unsafe-shell.
-
-Locations:
-
-- `Dockerfile:11`
-
 ### script-injection (severity: high)
 
-Rule (b) violation: In entrypoint.sh, the variable `$INPUT_SRC` (sourced from the `src` action input, which is caller-controlled) is used unquoted in a `for` loop: `for f in $INPUT_SRC; do`. Without double-quoting, the shell performs word-splitting and glob expansion on the value, allowing an attacker to inject shell metacharacters (e.g. spaces, globs, semicolons) via the `src` input to manipulate the loop or inject additional arguments.
+Sub-rule (a): The run: block in dockerimage.yml directly interpolates the GitHub Actions expression `${{ github.repository }}` into a shell command string. Although `github.repository` is not directly attacker-controlled, any `${{ ... }}` expression inside a run: block is a script-injection risk because the value is substituted by the template engine before the shell ever sees it, bypassing shell quoting. The offending line is: `run: docker build . --file Dockerfile --tag ${{ github.repository }}:$(date +%s)`. The fix is to pass the value via an env: variable and reference it as `"$REPO"` in the shell.
 
 Locations:
 
-- `entrypoint.sh:14`
+- `.github/workflows/dockerimage.yml:9`
+
+### unpinned-uses (severity: high)
+
+The workflow nimlint-action.yml references `reviewdog/action-nimlint@master`, which is a mutable branch ref rather than an immutable 40-character commit SHA. If the upstream repository is compromised or the branch is force-pushed, this action will execute arbitrary attacker-controlled code in the workflow. All `uses:` references should be pinned to a full SHA (e.g. `reviewdog/action-nimlint@<40-hex-sha> # master`).
+
+Locations:
+
+- `.github/workflows/nimlint-action.yml:11`
+
+### missing-permissions (severity: medium)
+
+None of the 6 workflow files under .github/workflows/ declare a top-level `permissions:` block, and no individual job within any of these files declares its own `permissions:` block. Without explicit permissions, GitHub Actions uses the repository's default token permissions, which may be overly broad (e.g. write access to contents, pull-requests, etc.). Each workflow should declare the minimal required permissions at the top level or per-job. Affected files: depup.yml, dockerimage.yml, nimlint-action.yml, release.yml, reviewdog.yml, test.yml.
+
+Locations:
+
+- `.github/workflows/depup.yml:1`
+- `.github/workflows/dockerimage.yml:1`
+- `.github/workflows/nimlint-action.yml:1`
+- `.github/workflows/release.yml:1`
+- `.github/workflows/reviewdog.yml:1`
+- `.github/workflows/test.yml:1`
 
 ## Iteration Notes
 
 ### Iteration 1
 
-**Fixes applied:** unsafe-shell, script-injection
+**Fixes applied:** script-injection, unpinned-uses, missing-permissions
 
 **Notes:**
 
-1. Dockerfile (unsafe-shell): Replaced `wget -O - -q <url> | sh -s -- ...` with a two-step approach: download the script to /tmp/install-reviewdog.sh, execute it with `sh /tmp/install-reviewdog.sh`, then remove it. This eliminates the pipe-to-shell anti-pattern while preserving the same pinned commit SHA in the URL.
-2. entrypoint.sh (script-injection): Changed `for f in $INPUT_SRC` to `for f in "$INPUT_SRC"` to prevent word-splitting and glob expansion on the caller-controlled `src` input, eliminating the shell metacharacter injection vector.
+1. script-injection (dockerimage.yml line 9): Moved `${{ github.repository }}` out of the run: shell string into an env: block as `REPO`, then referenced it as `"$REPO"` in the docker build command. 2. unpinned-uses (nimlint-action.yml line 11): Pinned `reviewdog/action-nimlint@master` to its full commit SHA `533c90f5c9d0188f3de61bd3eb13db71efb2f366` with a `# master` comment for readability. 3. missing-permissions: Added `permissions: {}` top-level blocks to all 6 affected workflow files (depup.yml, dockerimage.yml, nimlint-action.yml, release.yml, reviewdog.yml, test.yml), restricting the default token to no permissions.
 

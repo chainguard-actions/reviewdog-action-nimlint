@@ -12,7 +12,7 @@ LOG_FILE=check.log
 
 nim --version
 
-for f in "$INPUT_SRC"; do
+for f in $INPUT_SRC; do
   nim check "$f" 2>&1 > /dev/null |
     grep -E "^([^)]+)\) (Hint|Warning|Error): .*" |
     sed \
