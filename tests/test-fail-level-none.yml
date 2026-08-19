@@ -1,0 +1,32 @@
+name: Test fail_level none - action always succeeds regardless of issues
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create nim source file with a warning-level issue
+        run: |
+          mkdir -p src
+          # Create a nim file that will produce a hint/warning (unused variable)
+          cat > src/warn.nim << 'EOF'
+          var unused = 42
+          echo "done"
+          EOF
+
+      - id: action
+        uses: .
+        with:
+          github_token: dummy-token
+          src: src/warn.nim
+          reporter: local
+          filter_mode: nofilter
+          fail_level: none
+          level: info
+
+      - name: Assert action succeeded with fail_level none
+        run: |
+          echo "Action completed successfully with fail_level=none"
+          echo "PASS"
