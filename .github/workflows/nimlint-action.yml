@@ -1,0 +1,19 @@
+name: nimlint
+
+on: [pull_request]
+
+permissions: {}
+
+jobs:
+  nimlint:
+    name: runner / nimlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: nimlint-github-pr-review
+        uses: reviewdog/action-nimlint@533c90f5c9d0188f3de61bd3eb13db71efb2f366 # master
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review # Change reporter.
+          src: 'testdata/*.nim'
