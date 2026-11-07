@@ -18,6 +18,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | v1.20.0 | [`v1.20.0`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.20.0) | [`eec54c6`](https://github.com/reviewdog/action-nimlint/commit/eec54c6010f7f660ff8aac5b3ef5d1d129a6d69d) | [`HARDENING.md`](https://github.com/chainguard-actions/reviewdog-action-nimlint/blob/v1.20.0/HARDENING.md) |
 | v1.21.0 | [`v1.21.0`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.21.0) | [`1c086b7`](https://github.com/reviewdog/action-nimlint/commit/1c086b725a4107838bcd3ff5fa337f67b181e740) | [`HARDENING.md`](https://github.com/chainguard-actions/reviewdog-action-nimlint/blob/v1.21.0/HARDENING.md) |
 | v1.22.0 | [`v1.22.0`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.22.0) | [`3dc054e`](https://github.com/reviewdog/action-nimlint/commit/3dc054effc88f1a96c9ca5cbfc050e4572114094) | [`HARDENING.md`](https://github.com/chainguard-actions/reviewdog-action-nimlint/blob/v1.22.0/HARDENING.md) |
+| v1.23.0 | [`v1.23.0`](https://github.com/chainguard-actions/reviewdog-action-nimlint/tree/v1.23.0) | [`14e4d97`](https://github.com/reviewdog/action-nimlint/commit/14e4d97205802a1dbb8f4cb667547ba63ee51bd3) | [`HARDENING.md`](https://github.com/chainguard-actions/reviewdog-action-nimlint/blob/v1.23.0/HARDENING.md) |
 
 ## Privacy
 
